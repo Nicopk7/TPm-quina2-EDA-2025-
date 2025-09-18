@@ -44,37 +44,26 @@ void localizarLI(const char *codigo_abuscar, int *posicion, int *exito, int n, f
     int m;
     *exito = 0;
 
-    int semaforo[n + 1];
-    for (int i = 0; i < n + 1; i++) {
-        semaforo[i] = 0;
-    }
-
     if (n == 0){
         *exito = 0;
         *posicion = 0;
-        *costo += 1;
     }
     else{
-        while (LI < LS && strcmp(ListaInvertida[LI]->codigo, codigo_abuscar) != 0) {
-            m = (LI + LS + 1) / 2;
-
-            if (semaforo[m] == 0) {
-                *costo += 2;
-                semaforo[m] = 1;
-            }
-
+        m = (LI + LS + 1) / 2;
+        while (LI <= LS && strcmp(ListaInvertida[LI]->codigo, codigo_abuscar) != 0) {
             if (strcmp(ListaInvertida[m]->codigo, codigo_abuscar) < 0) {
                 LI = m + 1;
             } else {
                 LS = m - 1;
             }
+             m = (LI + LS + 1) / 2;
+             *costo+=2;
         }
-
-        if (semaforo[LI] == 0) {
-            *costo += 2;
-        }
-        *exito = strcmp(ListaInvertida[m]->codigo, codigo_abuscar) == 0;
+        *exito = (LI <= LS);
         *posicion = m;
+        if (*exito){
+            *costo+=2;
+        }
     }
 }
 
