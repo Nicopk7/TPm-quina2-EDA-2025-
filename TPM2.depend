@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1758109134 source:f:\universidad\eda\tpm2\tpm2\main.c
+1758398706 source:f:\universidad\eda\tpm2\tpm2\main.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -11,14 +11,16 @@
 
 1758065161 f:\universidad\eda\tpm2\tpm2\alumno.h
 
-1758109161 f:\universidad\eda\tpm2\tpm2\lso.h
+1758398645 f:\universidad\eda\tpm2\tpm2\lso.h
 	"Alumno.h"
 
-1758109517 f:\universidad\eda\tpm2\tpm2\libt.h
+1758398645 f:\universidad\eda\tpm2\tpm2\libt.h
 	"Alumno.h"
+	"LSO.h"
 
-1758109161 f:\universidad\eda\tpm2\tpm2\abb.h
+1758398832 f:\universidad\eda\tpm2\tpm2\abb.h
 	<string.h>
 	<stdlib.h>
 	"Alumno.h"
+	"LSO.h"
 

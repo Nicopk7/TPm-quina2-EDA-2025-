@@ -6,6 +6,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "Alumno.h"
+#include "LSO.h"
 #define MAX 130
 
 typedef struct nodo
@@ -44,15 +45,16 @@ int LocalizarABB(ABB *a, const char *id, nodo **x, nodo **y, int *exito, float *
     *y = NULL;
 
     *costo = 0.0;
-    while (*x != NULL && strcmp((*x)->arb.codigo, id) != 0)
+    while (*x != NULL && strcmp_insensitive((*x)->arb.codigo, id) != 0)
     {
         *costo += 1.0;
         *y = *x;
-        if (strcmp((*x)->arb.codigo, id) < 0)
+        if (strcmp_insensitive((*x)->arb.codigo, id) < 0)
             *x = (*x)->hd;
         else
             *x = (*x)->hi;
     }
+
     if (*x != NULL)
     {
         *costo += 1.0;
@@ -65,7 +67,6 @@ int LocalizarABB(ABB *a, const char *id, nodo **x, nodo **y, int *exito, float *
         return 0; // No encontrado
     }
 }
-
 
 
 int AltaABB(ABB *a, Alumno l, int *exito, float *costo)
@@ -145,7 +146,10 @@ Alumno evocar_alumno_ABB(ABB *a, const char *id, int *exito, float *costo)
 
 int muestra_abb(nodo *x)
 {
-    if (x == NULL) return 0;
+    if (x == NULL){
+        printf("Estructura vacia\n");
+        return 0;
+    }
 
     int i = 0, top = 0, capacidad = 10;
     nodo **pila = (nodo**) malloc(capacidad * sizeof(nodo*));
@@ -171,11 +175,11 @@ int muestra_abb(nodo *x)
 
         // Mostrar codigos de los hijos si existen
         if (aux->hi != NULL)
-            printf(" → Hijo izquierdo: %s\n", aux->hi->arb.codigo);
+            printf(" Hijo izquierdo: %s\n", aux->hi->arb.codigo);
         if (aux->hd != NULL)
-            printf(" → Hijo derecho: %s\n", aux->hd->arb.codigo);
+            printf(" Hijo derecho: %s\n", aux->hd->arb.codigo);
         if (aux->hi == NULL && aux->hd == NULL)
-            printf(" → Sin hijos.\n");
+            printf(" Sin hijos.\n");
 
         printf("******************************************\n");
 

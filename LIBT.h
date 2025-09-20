@@ -1,6 +1,7 @@
 #ifndef LIBT_H_INCLUDED
 #define LIBT_H_INCLUDED
 #include "Alumno.h"
+#include "LSO.h"
 #define MAXALUMNOS 130
 
 typedef struct{
@@ -44,39 +45,29 @@ void localizarLI(const char *codigo_abuscar, int *posicion, int *exito, int n, f
     int m;
     *exito = 0;
 
-    int semaforo[n + 1];
-    for (int i = 0; i < n + 1; i++) {
-        semaforo[i] = 0;
-    }
-
     if (n == 0){
         *exito = 0;
         *posicion = 0;
-        *costo += 1;
     }
     else{
-        while (LI < LS && strcmp(ListaInvertida[LI]->codigo, codigo_abuscar) != 0) {
-            m = (LI + LS + 1) / 2;
-
-            if (semaforo[m] == 0) {
-                *costo += 2;
-                semaforo[m] = 1;
-            }
-
-            if (strcmp(ListaInvertida[m]->codigo, codigo_abuscar) < 0) {
+        m = (LI + LS + 1) / 2;
+        while (LI <= LS && strcmp_insensitive(ListaInvertida[m]->codigo, codigo_abuscar) != 0) {
+            if (strcmp_insensitive(ListaInvertida[m]->codigo, codigo_abuscar) < 0) {
                 LI = m + 1;
             } else {
                 LS = m - 1;
             }
-        }
-
-        if (semaforo[LI] == 0) {
+            m = (LI + LS + 1) / 2;
             *costo += 2;
         }
-        *exito = strcmp(ListaInvertida[m]->codigo, codigo_abuscar) == 0;
+        *exito = (LI <= LS);
         *posicion = m;
+        if (*exito){
+            *costo += 2;
+        }
     }
 }
+
 
 int altaLI(Alumno nuevo, int *n, float *costo) {
     int posicion = 0;
@@ -117,17 +108,16 @@ int BajaLI(Alumno aux, int *n, float *costo, int flag){
     int exito, pos, confirmacion;
     float costoaux = 0;
     localizarLI(aux.codigo, &pos, &exito, *n, &costoaux);
-
     if (exito==0){
         return 0;
     }
     else{
         if(flag == 1){
-            if(!(0 == strcmpi(ListaInvertida[pos]->codigo, aux.codigo) &&
-            0 == strcmpi(ListaInvertida[pos]->nombreapellido, aux.nombreapellido) &&
-            0 == strcmpi(ListaInvertida[pos]->correo, aux.correo) &&
+            if(!(0 == strcmp_insensitive(ListaInvertida[pos]->codigo, aux.codigo) &&
+            0 == strcmp_insensitive(ListaInvertida[pos]->nombreapellido, aux.nombreapellido) &&
+            0 == strcmp_insensitive(ListaInvertida[pos]->correo, aux.correo) &&
             ListaInvertida[pos]->nota == aux.nota &&
-            0 == strcmpi(ListaInvertida[pos]->condicionFinal, aux.condicionFinal))){
+            0 == strcmp_insensitive(ListaInvertida[pos]->condicionFinal, aux.condicionFinal))){
             return exito = 0;
             }
         }
@@ -243,6 +233,7 @@ void memorizacionPreviaLI(int *n, float *costos) {
     system("pause");
     fclose(archivo);
 }
+
 
 
 

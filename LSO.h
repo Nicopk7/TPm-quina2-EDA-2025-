@@ -32,21 +32,25 @@ Alumno evocar(char codigo[], int contador,int *exito_aux, float *costo);
 int modificarAlumno(char codigo[], int contador);
 int memorizacionprevia(int *contador);
 void mostrarLSO(int contador);
+int strcmp_insensitive(const char *s1, const char *s2);
 
 void localizar(char codigo[], int *exito, int *posicion, int contador, float *costo){
     int i = 0;
+    *costo = 0;
     *exito = 0;
-    while (i < contador && strcmp(LSO[i].codigo, codigo) < 0){
+    while (i < contador && strcmp_insensitive(LSO[i].codigo, codigo) < 0){
         i++;
         *costo += 1;
     }
-    if (i < contador && strcmp(LSO[i].codigo, codigo) == 0){
-        *exito = 1;
-        *posicion = i;
+    if (i < contador ){
+        *costo+=1;
+        if(strcmp_insensitive(LSO[i].codigo, codigo) == 0){
+            *exito = 1;
+            *posicion = i;
+        }
     }
-    else{
-        *posicion = i;
-    }
+    *posicion = i;
+
 }
 
 
@@ -65,6 +69,7 @@ int alta(Alumno a, int *contador, float *costo){
         *costo += 1;
     }
     LSO[posicion] = a;
+    *contador += 1;
     return 1; // alta EXITOSA
 }
 
@@ -113,6 +118,7 @@ int baja(Alumno a, int *contador, float *costo, int flag){
         LSO[j] = LSO[j + 1];
         *costo += 1;
         }
+        *contador -= 1;
         return 1; // baja exitosa
         }
 }
@@ -137,7 +143,7 @@ Alumno evocar(char codigo[], int contador,int *exito_aux, float *costo){
     }
 }
 
-int modificarAlumno(char codigo[], int contador){
+/*int modificarAlumno(char codigo[], int contador){
     int exito = 0, posicion = 0, opcion = 0;
     float costo;
     localizar(codigo, &exito, &posicion, contador, &costo);
@@ -255,7 +261,7 @@ int memorizacionprevia(int *contador){
         return 3; // lista llena
     }
     return 1; // carga exitosa
-}
+}*/
 
 void mostrarLSO(int contador){
     int mostrados = 0;
@@ -265,6 +271,7 @@ void mostrarLSO(int contador){
         separador;
         return;
     }
+    printf("Alumnos cargados: %d\n", contador);
     for (int i = 0; i < contador; i++) {
         separador;
         printf("\nAlumno #%d\n", mostrados + 1);
@@ -300,9 +307,17 @@ void mostrarLSO(int contador){
         }
     }
     if (mostrados % 3 != 0){
-        system("pause");
+
     }
 }
 
-
+int strcmp_insensitive(const char *s1, const char *s2) {
+    while (*s1 && *s2) {
+        if (toupper((unsigned char)*s1) != toupper((unsigned char)*s2))
+            return toupper((unsigned char)*s1) - toupper((unsigned char)*s2);
+        s1++;
+        s2++;
+    }
+    return toupper((unsigned char)*s1) - toupper((unsigned char)*s2);
+}
 #endif // LSO_H_INCLUDED
