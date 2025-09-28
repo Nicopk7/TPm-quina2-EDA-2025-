@@ -70,6 +70,7 @@ int alta(Alumno a, int *contador, float *costo){
     }
     LSO[posicion] = a;
     *contador += 1;
+    //SUMAR 1 al asignar la tupla o no? (Esto arregla el medio)
     return 1; // alta EXITOSA
 }
 

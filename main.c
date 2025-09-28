@@ -1,3 +1,28 @@
+//GRUPO 34
+//PEREYRA NICOLAS - VOTTERO ELISEO
+//ANALISIS
+
+                                                        /*COMPARACION DE ESTRUCTURAS
+
+                                                        COSTOS          LSO     LIBT    ABB
+                                                        ______________________________________
+                                                        MAX.ALTA        91.00   45.50   11.50
+                                                        MED.ALTA        23.01   11.51   6.17
+                                                        MAX.BAJA        91.00   45.50   8.50
+                                                        MED.BAJA        22.38   11.19   5.36
+                                                        MAX.EVOEX       100.00  14.00   12.00
+                                                        MED.EVOEX       45.13   11.18   6.43
+                                                        MAX.EVONOEX     71.00   14.00   11.00
+                                                        MED.EVONOEX     24.57   10.49   5.95
+                                                        */
+
+/*
+Si lo que se busca hacer son busquedas, tanto la Lista invertida como el Arbol binario de busqueda son buenos, pero el ABB
+gana por menor costo promedio.
+Si hay muchas altas y bajas, el ABB es el mas adecuado porque evita corrimientos.
+La LSO queda totalmente descartada en escenarios grandes, solo sirve si el conjunto de elementos o datos es muy chico o fijo.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -6,7 +31,6 @@
 #include "LSO.h"
 #include "LIBT.h"
 #include "ABB.h"
-
 #define separador printf("____________________________________________________________________________________________ \n")
 #define borrador system("cls")
 #define pausa system("pause")
