@@ -1,0 +1,50 @@
+1
+0002A25
+raíz
+raiz@gmail.com
+10
+Promociona
+1
+0001A25
+hijoizq, raiz
+hijoizq@gmail.com
+8
+Promociona
+1
+0006A25
+hijoder, raiz
+hijoder@gmail.com
+7
+Promociona
+1
+0004A25
+hijoizq, derecha
+hdd@gmail.com
+6
+Regular
+1
+0005A25
+hijoder, hijoizq
+hddizq@gmail.com
+4
+Libre
+3
+0005A25
+2
+0005A25
+hijoder, hijoizq
+hddizq@gmail.com
+4
+Libre
+2
+0004A25
+hijoizq, derecha
+hdd@gmail.com
+6
+Regular
+2
+0002A25
+raíz
+raiz@gmail.com
+10
+Promociona

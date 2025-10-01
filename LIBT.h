@@ -61,7 +61,8 @@ int altaLI(Alumno nuevo, int *n, float *costo) {
     if (exito) {
         return 1; // Ya existe
     }else{
-
+        if(*n >= MAXALUMNOS) return 0;
+//CONTROL LISTA LLENA
     Alumno* nuevoPtr = malloc(sizeof(Alumno));
     if (nuevoPtr == NULL) {
         return 2; // Error de memoria

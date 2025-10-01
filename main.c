@@ -152,7 +152,7 @@ int main() {
                 init_ABB(&arbol);
                 inicializarLI();
 
-                FILE *fp = fopen("PruebaAltas.txt", "r");
+                FILE *fp = fopen("Operaciones-Alumnos.txt", "r");
                 if (fp == NULL) {
                     printf("\tNo se pudo abrir el archivo\n");
                 } else {
@@ -186,10 +186,9 @@ int main() {
                                 // Alta en LSO
                                 costoaux = 0;
                                 resultalta = alta(aux, &contadorLSO, &costoaux);
-                                printf("resultalta: %d\n", resultalta);
+
                                 if (resultalta) {
                                     c_lso.cant_altas++;
-                                    printf("cant altas: %f\n", c_lso.cant_altas);
                                     c_lso.medio_alta += costoaux;
                                     if (costoaux > c_lso.maximo_alta)
                                         c_lso.maximo_alta = costoaux;
@@ -200,7 +199,6 @@ int main() {
                                 resultalta = AltaABB(&arbol, aux, &exito_aux, &costoaux);
                                 if (resultalta) {
                                     c_abb.cant_altas++;
-                                    printf("cant altas: %f\n", c_abb.cant_altas);
                                     c_abb.medio_alta += costoaux;
                                     if (costoaux > c_abb.maximo_alta)
                                         c_abb.maximo_alta = costoaux;
@@ -212,7 +210,6 @@ int main() {
                                     resultalta = altaLI(aux, &contadorLI, &costoaux);
                                     if (resultalta == 0) {
                                         c_libb.cant_altas++;
-                                        printf("cant altas: %f\n", c_libb.cant_altas);
                                         c_libb.medio_alta += costoaux;
                                         if (costoaux > c_libb.maximo_alta)
                                             c_libb.maximo_alta = costoaux;
@@ -246,7 +243,6 @@ int main() {
                                     int resbaja = baja(aux, &contadorLSO, &costoaux, modo);
                                     if (resbaja) {
                                         c_lso.cant_bajas++;
-                                        printf("cant bajas: %f\n", c_lso.cant_bajas);
                                         c_lso.medio_baja += costoaux;
                                         if (costoaux > c_lso.maximo_baja)
                                             c_lso.maximo_baja = costoaux;
@@ -259,7 +255,6 @@ int main() {
                                     int resbaja = bajaABB(&arbol, aux, &costoaux, modo);
                                     if (resbaja == 1) {
                                         c_abb.cant_bajas++;
-                                        printf("cant bajas: %f\n", c_abb.cant_bajas);
                                         c_abb.medio_baja += costoaux;
                                         if (costoaux > c_abb.maximo_baja)
                                             c_abb.maximo_baja = costoaux;
@@ -272,7 +267,6 @@ int main() {
                                     int resbaja = BajaLI(aux, &contadorLI, &costoaux, modo);
                                     if (resbaja == 1) {
                                         c_libb.cant_bajas++;
-                                        printf("cant bajas: %f\n", c_libb.cant_bajas);
                                         c_libb.medio_baja += costoaux;
                                         if (costoaux > c_libb.maximo_baja)
                                             c_libb.maximo_baja = costoaux;

@@ -24,3 +24,28 @@
 	"Alumno.h"
 	"LSO.h"
 
+1759338853 source:c:\users\elise\documents\eliseo\facultad\eda\pdm2\tpm-quina2-eda-2025-\main.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	"Alumno.h"
+	"LSO.h"
+	"LIBT.h"
+	"ABB.h"
+
+1759335037 c:\users\elise\documents\eliseo\facultad\eda\pdm2\tpm-quina2-eda-2025-\alumno.h
+
+1759335037 c:\users\elise\documents\eliseo\facultad\eda\pdm2\tpm-quina2-eda-2025-\lso.h
+	"Alumno.h"
+
+1759335037 c:\users\elise\documents\eliseo\facultad\eda\pdm2\tpm-quina2-eda-2025-\libt.h
+	"Alumno.h"
+	"LSO.h"
+
+1759335037 c:\users\elise\documents\eliseo\facultad\eda\pdm2\tpm-quina2-eda-2025-\abb.h
+	<string.h>
+	<stdlib.h>
+	"Alumno.h"
+	"LSO.h"
+
