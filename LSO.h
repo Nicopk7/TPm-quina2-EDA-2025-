@@ -6,22 +6,6 @@
 #define borrador system("cls")
 #define pausa system("pause")
 
-typedef struct{
-    float costoLocalizar;
-    float maximo_alta;
-    float medio_alta;
-    float maximo_baja;
-    float medio_baja;
-    float max_evo_succ;
-    float med_evo_succ;
-    float max_evo_fail;
-    float med_evo_fail;
-    float cant_altas;
-    float cant_bajas;
-    float cant_evos_succ;
-    float cant_evos_fail;
-}costosLSO;
-
 Alumno LSO[MAXALUMNOS];
 
 //PROTOTIPOS
@@ -70,7 +54,6 @@ int alta(Alumno a, int *contador, float *costo){
     }
     LSO[posicion] = a;
     *contador += 1;
-    //SUMAR 1 al asignar la tupla o no? (Esto arregla el medio)
     return 1; // alta EXITOSA
 }
 

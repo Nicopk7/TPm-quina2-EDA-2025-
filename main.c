@@ -82,10 +82,10 @@ int main() {
     int exitoLI = 0, opcion, opcion2, opcion3, resultalta, exito_aux, red, contadorLI = 0, contadorLSO = 0, contadorABB = 0, exitoABB, costo;
     int modo, operacion;
     float costoaux = 0;
-    Costos c_lvo;
+    Costos c_lso;
     Costos c_libb;
     Costos c_abb;
-    init_costos(&c_lvo);
+    init_costos(&c_lso);
     init_costos(&c_libb);
     init_costos(&c_abb);
     Alumno nuevo, aux;
@@ -152,7 +152,7 @@ int main() {
                 init_ABB(&arbol);
                 inicializarLI();
 
-                FILE *fp = fopen("Operaciones-Alumnos.txt", "r");
+                FILE *fp = fopen("PruebaAltas.txt", "r");
                 if (fp == NULL) {
                     printf("\tNo se pudo abrir el archivo\n");
                 } else {
@@ -186,11 +186,13 @@ int main() {
                                 // Alta en LSO
                                 costoaux = 0;
                                 resultalta = alta(aux, &contadorLSO, &costoaux);
+                                printf("resultalta: %d\n", resultalta);
                                 if (resultalta) {
-                                    c_lvo.cant_altas++;
-                                    c_lvo.medio_alta += costoaux;
-                                    if (costoaux > c_lvo.maximo_alta)
-                                        c_lvo.maximo_alta = costoaux;
+                                    c_lso.cant_altas++;
+                                    printf("cant altas: %f\n", c_lso.cant_altas);
+                                    c_lso.medio_alta += costoaux;
+                                    if (costoaux > c_lso.maximo_alta)
+                                        c_lso.maximo_alta = costoaux;
                                 }
 
                                 // Alta en ABB
@@ -198,6 +200,7 @@ int main() {
                                 resultalta = AltaABB(&arbol, aux, &exito_aux, &costoaux);
                                 if (resultalta) {
                                     c_abb.cant_altas++;
+                                    printf("cant altas: %f\n", c_abb.cant_altas);
                                     c_abb.medio_alta += costoaux;
                                     if (costoaux > c_abb.maximo_alta)
                                         c_abb.maximo_alta = costoaux;
@@ -209,6 +212,7 @@ int main() {
                                     resultalta = altaLI(aux, &contadorLI, &costoaux);
                                     if (resultalta == 0) {
                                         c_libb.cant_altas++;
+                                        printf("cant altas: %f\n", c_libb.cant_altas);
                                         c_libb.medio_alta += costoaux;
                                         if (costoaux > c_libb.maximo_alta)
                                             c_libb.maximo_alta = costoaux;
@@ -241,10 +245,11 @@ int main() {
                                 if (contadorLSO > 0) {
                                     int resbaja = baja(aux, &contadorLSO, &costoaux, modo);
                                     if (resbaja) {
-                                        c_lvo.cant_bajas++;
-                                        c_lvo.medio_baja += costoaux;
-                                        if (costoaux > c_lvo.maximo_baja)
-                                            c_lvo.maximo_baja = costoaux;
+                                        c_lso.cant_bajas++;
+                                        printf("cant bajas: %f\n", c_lso.cant_bajas);
+                                        c_lso.medio_baja += costoaux;
+                                        if (costoaux > c_lso.maximo_baja)
+                                            c_lso.maximo_baja = costoaux;
                                     }
                                 }
 
@@ -254,6 +259,7 @@ int main() {
                                     int resbaja = bajaABB(&arbol, aux, &costoaux, modo);
                                     if (resbaja == 1) {
                                         c_abb.cant_bajas++;
+                                        printf("cant bajas: %f\n", c_abb.cant_bajas);
                                         c_abb.medio_baja += costoaux;
                                         if (costoaux > c_abb.maximo_baja)
                                             c_abb.maximo_baja = costoaux;
@@ -266,6 +272,7 @@ int main() {
                                     int resbaja = BajaLI(aux, &contadorLI, &costoaux, modo);
                                     if (resbaja == 1) {
                                         c_libb.cant_bajas++;
+                                        printf("cant bajas: %f\n", c_libb.cant_bajas);
                                         c_libb.medio_baja += costoaux;
                                         if (costoaux > c_libb.maximo_baja)
                                             c_libb.maximo_baja = costoaux;
@@ -280,15 +287,15 @@ int main() {
                                 if (contadorLSO > 0) {
                                     evocar(aux.codigo, contadorLSO, &exito_aux, &costoaux);
                                     if (exito_aux) {
-                                        c_lvo.cant_evos_succ++;
-                                        c_lvo.med_evo_succ += costoaux;
-                                        if (costoaux > c_lvo.max_evo_succ)
-                                            c_lvo.max_evo_succ = costoaux;
+                                        c_lso.cant_evos_succ++;
+                                        c_lso.med_evo_succ += costoaux;
+                                        if (costoaux > c_lso.max_evo_succ)
+                                            c_lso.max_evo_succ = costoaux;
                                     } else {
-                                        c_lvo.cant_evos_fail++;
-                                        c_lvo.med_evo_fail += costoaux;
-                                        if (costoaux > c_lvo.max_evo_fail)
-                                            c_lvo.max_evo_fail = costoaux;
+                                        c_lso.cant_evos_fail++;
+                                        c_lso.med_evo_fail += costoaux;
+                                        if (costoaux > c_lso.max_evo_fail)
+                                            c_lso.max_evo_fail = costoaux;
                                     }
                                 }
 
@@ -338,29 +345,29 @@ int main() {
                     printf("COSTOS\t\tLSO\tLIBT\tABB\n");
                     separador;
 
-                    float medAltaLSO = (c_lvo.cant_altas > 0) ? (c_lvo.medio_alta / c_lvo.cant_altas) : 0.0;
+                    float medAltaLSO = (c_lso.cant_altas > 0) ? (c_lso.medio_alta / c_lso.cant_altas) : 0.0;
                     float medAltaLI  = (c_libb.cant_altas > 0) ? (c_libb.medio_alta / c_libb.cant_altas) : 0.0;
                     float medAltaABB = (c_abb.cant_altas > 0) ? (c_abb.medio_alta / c_abb.cant_altas) : 0.0;
 
-                    float medBajaLSO = (c_lvo.cant_bajas > 0) ? (c_lvo.medio_baja / c_lvo.cant_bajas) : 0.0;
+                    float medBajaLSO = (c_lso.cant_bajas > 0) ? (c_lso.medio_baja / c_lso.cant_bajas) : 0.0;
                     float medBajaLI  = (c_libb.cant_bajas > 0) ? (c_libb.medio_baja / c_libb.cant_bajas) : 0.0;
                     float medBajaABB = (c_abb.cant_bajas > 0) ? (c_abb.medio_baja / c_abb.cant_bajas) : 0.0;
 
-                    float medEvoExLSO = (c_lvo.cant_evos_succ > 0) ? (c_lvo.med_evo_succ / c_lvo.cant_evos_succ) : 0.0;
+                    float medEvoExLSO = (c_lso.cant_evos_succ > 0) ? (c_lso.med_evo_succ / c_lso.cant_evos_succ) : 0.0;
                     float medEvoExLI  = (c_libb.cant_evos_succ > 0) ? (c_libb.med_evo_succ / c_libb.cant_evos_succ) : 0.0;
                     float medEvoExABB = (c_abb.cant_evos_succ > 0) ? (c_abb.med_evo_succ / c_abb.cant_evos_succ) : 0.0;
 
-                    float medEvoNoExLSO = (c_lvo.cant_evos_fail > 0) ? (c_lvo.med_evo_fail / c_lvo.cant_evos_fail) : 0.0;
+                    float medEvoNoExLSO = (c_lso.cant_evos_fail > 0) ? (c_lso.med_evo_fail / c_lso.cant_evos_fail) : 0.0;
                     float medEvoNoExLI  = (c_libb.cant_evos_fail > 0) ? (c_libb.med_evo_fail / c_libb.cant_evos_fail) : 0.0;
                     float medEvoNoExABB = (c_abb.cant_evos_fail > 0) ? (c_abb.med_evo_fail / c_abb.cant_evos_fail) : 0.0;
 
-                    printf("MAX.ALTA\t%.2f\t%.2f\t%.2f\n", c_lvo.maximo_alta, c_libb.maximo_alta, c_abb.maximo_alta);
+                    printf("MAX.ALTA\t%.2f\t%.2f\t%.2f\n", c_lso.maximo_alta, c_libb.maximo_alta, c_abb.maximo_alta);
                     printf("MED.ALTA\t%.2f\t%.2f\t%.2f\n", medAltaLSO, medAltaLI, medAltaABB);
-                    printf("MAX.BAJA\t%.2f\t%.2f\t%.2f\n", c_lvo.maximo_baja, c_libb.maximo_baja, c_abb.maximo_baja);
+                    printf("MAX.BAJA\t%.2f\t%.2f\t%.2f\n", c_lso.maximo_baja, c_libb.maximo_baja, c_abb.maximo_baja);
                     printf("MED.BAJA\t%.2f\t%.2f\t%.2f\n", medBajaLSO, medBajaLI, medBajaABB);
-                    printf("MAX.EVOEX\t%.2f\t%.2f\t%.2f\n", c_lvo.max_evo_succ, c_libb.max_evo_succ, c_abb.max_evo_succ);
+                    printf("MAX.EVOEX\t%.2f\t%.2f\t%.2f\n", c_lso.max_evo_succ, c_libb.max_evo_succ, c_abb.max_evo_succ);
                     printf("MED.EVOEX\t%.2f\t%.2f\t%.2f\n", medEvoExLSO, medEvoExLI, medEvoExABB);
-                    printf("MAX.EVONOEX\t%.2f\t%.2f\t%.2f\n", c_lvo.max_evo_fail, c_libb.max_evo_fail, c_abb.max_evo_fail);
+                    printf("MAX.EVONOEX\t%.2f\t%.2f\t%.2f\n", c_lso.max_evo_fail, c_libb.max_evo_fail, c_abb.max_evo_fail);
                     printf("MED.EVONOEX\t%.2f\t%.2f\t%.2f\n", medEvoNoExLSO, medEvoNoExLI, medEvoNoExABB);
                 }
                 break;

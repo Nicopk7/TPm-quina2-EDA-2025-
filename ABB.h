@@ -92,19 +92,19 @@ int AltaABB(ABB *a, Alumno l, int *exito, float *costo)
     if (a->Nodos == 0)
     {
         a->raiz = x;
-        *costo = c + 0.5;
+        *costo = 0.5;
     }
     else
     {
         if (strcmp(l.codigo, y->arb.codigo) < 0)
         {
             y->hi = x;
-            *costo = c + 0.5;
+            *costo = 0.5;
         }
         else
         {
             y->hd = x;
-            *costo = c + 0.5;
+            *costo = 0.5;
         }
     }
 
@@ -232,8 +232,9 @@ int bajaABB(ABB *a, Alumno aux, float *costo, int flag)
     nodo *x, *y, *u, *u1;
     int exito = 0;
     int confirmacion, reslocalizar;
+    float costoaux;
 
-    reslocalizar = LocalizarABB(a, aux.codigo, &x, &y, &exito, costo);
+    reslocalizar = LocalizarABB(a, aux.codigo, &x, &y, &exito, &costoaux);
     if (reslocalizar == 0)
         return 0; // Alumno no encontrado
 

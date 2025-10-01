@@ -4,22 +4,6 @@
 #include "LSO.h"
 #define MAXALUMNOS 130
 
-typedef struct{
-    float costoLocalizar;
-    float maximo_alta;
-    float medio_alta;
-    float maximo_baja;
-    float medio_baja;
-    float max_evo_succ;
-    float med_evo_succ;
-    float max_evo_fail;
-    float med_evo_fail;
-    float cant_altas;
-    float cant_bajas;
-    float cant_evos_succ;
-    float cant_evos_fail;
-}costosLIBT;
-
 Alumno* ListaInvertida[MAXALUMNOS];
 
 
@@ -91,6 +75,7 @@ int altaLI(Alumno nuevo, int *n, float *costo) {
     }
 
     ListaInvertida[posicion] = nuevoPtr;
+    *costo+=0.5;
     (*n)++;
     return 0;} //OK
 }
